@@ -110,5 +110,4 @@ individual components:
 - [Xbox XBE Recomp](https://github.com/TGP482/XboxXBE-Recomp) by TGP482, the recompiler and runtime this port is
   built on.
 - [MOHRS-XBERecomp](https://github.com/neonoxd/MOHRS-XBERecomp) by [neonoxd](https://github.com/neonoxd) (MIT): the
-  menu pointer, the PC Options pages, the software cursor, the keyboard and mouse layer and the field of view
-  setting come from it. Its license is in `THIRD_PARTY_NOTICES.md`.
+  original PC Options pages, the menu pointer and the software cursor come from it. Its license is in `THIRD_PARTY_NOTICES.md`.
