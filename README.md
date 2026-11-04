@@ -20,8 +20,7 @@ the goal; the co-op image, `MOH3RDC.xbe`, builds too (as `MOH3RDC.exe`) but is n
 
 ## PC features
 
-The PC Options pages, the menu pointer, the software cursor, the keyboard and mouse layer and the field of view
-setting come from [neonoxd's MOHRS-XBERecomp](https://github.com/neonoxd/MOHRS-XBERecomp); see Credits.
+The original PC Options pages, the menu pointer, the software cursor, come from [neonoxd's MOHRS-XBERecomp](https://github.com/neonoxd/MOHRS-XBERecomp); see Credits.
 
 - **PC Options inside the game's menus**: under Options on the main menu, and under Preferences on the pause
   screen. Display mode, render scale, frame rate limit (30, the game's own pacing, or 60), field
