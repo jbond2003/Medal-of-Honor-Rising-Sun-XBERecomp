@@ -1,99 +1,114 @@
 # Medal of Honor: Rising Sun - XBE Recomp
 
-An unofficial native PC port of the original Xbox version of Medal of Honor: Rising Sun (USA), made with
-[Xbox XBE Recomp](https://github.com/TGP482/XboxXBE-Recomp). The game's x86 code is recompiled to C++ ahead of
-time and the Xbox libraries run on Windows: Direct3D 12 for graphics, XAudio2 for sound.
+> This port is a passion project of mine. It wouldn't have been possible without the help of
+> [Claude](https://claude.ai) and the [Xbox XBE Recomp](https://github.com/TGP482/XboxXBE-Recomp) tool.
+>
+> I hope you enjoy playing it. I've only tested the first mission and part of the second, and I need people to test
+> it on Linux (through Proton or Wine). Please report any problems on the [issues page](../../issues), and feel free
+> to fork it and change anything you like.
+
+An unofficial native PC port of the original Xbox version of Medal of Honor: Rising Sun, with PC graphics options,
+keyboard and mouse support, and other enhancements.
+
+This port was created using the [Xbox XBE Recomp](https://github.com/TGP482/XboxXBE-Recomp) tool.
 
 > [!NOTE]
-> This project does not include any game assets or game code. You must provide the files from your own legally
-> acquired copy of the game. The XBE, the game data and the recompiled code (`generated/`) never go in this repository.
+> This project does not include any game assets. You must provide the files from your own legally acquired copy of
+> the game to install or build.
 
-## Status
+## Installation
 
-Playable on Windows from start to finish of a mission, with a controller or keyboard and mouse. Single player is
-the goal; the co-op image, `MOH3RDC.xbe`, builds too (as `MOH3RDC.exe`) but is not a focus.
+- Put your game files in the `assets` folder. This can be an ISO, or the extracted files, of the USA release. An ISO
+  can be extracted with [extract-xiso](https://github.com/xboxdev/extract-xiso).
+- Run `MOHRS.exe`. The first start compiles the game's code for your PC, this only happens once.
+- PC settings can be adjusted in the in-game menus (Options on the main menu, Preferences on the pause menu), or
+  through the Settings overlay, which is opened with F10.
 
-- The XDK 5455 libraries the game uses were added to the SDK (`sdk/xdk/5455`, in
-  [the SDK fork](https://github.com/jbond2003/XboxXBERecomp)).
-- Known issue: a rare crash while a level loads. If it happens, a crash dump and a copy of the log are written to
-  `CrashDumps` beside the exe; please attach both to an issue.
+## Features
 
-## PC features
+### Display
 
-The original PC Options pages, the menu pointer, the software cursor, come from [neonoxd's MOHRS-XBERecomp](https://github.com/neonoxd/MOHRS-XBERecomp); see Credits.
+- **Display Mode** - Switch between Fullscreen, Borderless and Windowed.
+- **Render Scale** - Renders the game at 50% to 200% of the output resolution, allowing supersampling or
+  downscaling independent of the window size.
+- **Field of View** - Sets the horizontal field of view during gameplay from 45 to 140 degrees, with 70 being the
+  game's default. Scopes still zoom as before.
+- **Frame Rate Limit** - 30, the game's original pacing, or 60.
+- **FPS Counter** - Displays the frame rate on screen.
 
-- **PC Options inside the game's menus**: under Options on the main menu, and under Preferences on the pause
-  screen. Display mode, render scale, frame rate limit (30, the game's own pacing, or 60), field
-  of view, anisotropic filtering, FPS counter, mouse sensitivity, vertical sensitivity, invert,
-  and Key Bindings, which opens the bindings over the screen.
-- **Menu pointer**: the mouse moves a pointer over the game's menus; a left click picks, a right click backs out,
-  the wheel scrolls or changes the row under the pointer. A click on the selected settings row changes its value.
-  On the mission map a click picks a mission and a click on the picked one goes on. The pointer hides once you
-  move a stick or press a key.
-- **F10** still opens the overlay panel, which also has the texture tools and the key bindings. Settings are kept
-  in `settings.toml` beside the exe, the bindings under `[keys]`.
-- **Keyboard and mouse**: raw mouse input turns the view directly (not through the game's coarse stick), also
-  while zoomed or on a mounted gun, slowed while zoomed in. The gameplay keys press the game's own actions, so they
-  do the same whichever controller layout is picked in the game's options; a controller and the keyboard work
-  together, and the controller does not rumble while the keyboard and mouse are in use. Defaults: WASD move, mouse
-  look, left click fire, right click aim mode, F action, mouse wheel change weapon (sniper zoom while a scope is
-  up), G grenade, Space jump, R reload, C or Ctrl crouch, Z center view, V
-  or middle click melee, Alt walk, Escape pause, Tab back. WASD also moves through menus. A settings file from an
-  older build has its old default keys (E/F action, Q/Mouse4 change weapon) moved to the new defaults once; keys
-  you bound yourself stay.
-- **Keyboard and mouse prompts**: while the keyboard and mouse are in use the in-game hints name the bound keys
-  ("Press F to Open Door", "Press Escape to View Objectives") and the menus' bottom bar the keys in place of the
-  A, B and dpad pictures ("ENTER CONFIRM", "BACKSPACE BACK"); the controller's come back when a controller is used.
-- **Skippable movies**: a left click, Enter, Space, Escape or a controller face button skips any movie, the EA
-  logo and the opening cinematic included. A skipped movie holds its last picture until what comes next is drawn.
-- **Fast loads**: the game's loader no longer sleeps between its load steps, so levels and the menus come up in a
-  moment.
-- **Shader cache**: compiled shaders are kept in `shader_cache` beside the exe, so an effect only hitches the first
-  time it is ever seen.
-- **Performance logging**: put an empty `xbe_perf` file beside the exe, or set `XBE_PERF=1`, for once a second frame time breakdowns and present interval
-  percentiles in the log, in release builds too.
+### Graphics
 
-## A note from the author
+- **Anisotropic Filtering** - Forces 2x, 4x, 8x or 16x anisotropic filtering on all textures.
 
-This port is a passion project of mine. It wouldn't have been possible without the help of
-[Claude](https://claude.ai) and the [Xbox XBE Recomp](https://github.com/TGP482/XboxXBE-Recomp) tool.
+### Textures
 
-I hope you enjoy playing it. I've only tested the first mission and part of the second, and I need people to test
-it on Linux (through Proton or Wine). Please report any problems on the [issues page](../../issues), and feel free to
-fork it and change anything you like.
+- **Texture Replacement** - Replaces the game's textures with the `.dds` or `.png` images in the
+  `textures\replacement` folder beside the exe.
+- **Texture Dumping** - Saves every texture the game uses into the `textures\dumps` folder beside the exe.
 
-## Playing a release
+### Input
 
-1. Download `MOHRS.zip` from the releases page and extract it anywhere.
-2. Put your game files in its `assets` folder: `default.xbe` (the USA retail XBE) with the `DATA` folder beside it,
-   and `MOH3RDC.xbe` for co-op.
-3. Run `MOHRS.exe`. The first start recompiles the game's code from your XBE, which takes a few minutes; later
-   starts are immediate. Windows 10 or 11, 64 bit, and a Direct3D 12 GPU are needed.
+- **Mouse and Keyboard** - Full keyboard and mouse support with raw input, adjustable horizontal and vertical
+  sensitivity, inverted look and rebindable controls.
+- **Seamless Switching** - Use a controller and the keyboard and mouse at any time. Button prompts and menu hints
+  follow the device you're using.
+- **Menu Mouse** - Hover and click in the game's menus, right click to go back, and use the wheel to scroll or
+  change settings.
+
+### General
+
+- **Skippable Movies** - Skip any movie with a click, Enter, Space, Escape or a controller face button.
+- **Fast Loads** - Levels and menus load without the original's built-in waits.
+
+## System Requirements
+
+### Minimum
+
+- **OS**
+  - Windows 10 64-bit
+- **CPU** with support for SSE4.2 and POPCNT
+  - Intel Nehalem (Intel Core 1st Generation)
+  - AMD Bulldozer (AMD FX series)
+- **GPU** with support for Direct3D 12
+- **Memory**
+  - 4 GB
 
 ## Building
 
-1. Clone with submodules: `git clone --recursive <this repo>`.
-2. Put your game files in `assets`: `default.xbe` (the USA retail XBE, SHA-256
-   `5e63112e14e91fa8ae5b3c9364e64ca027cc33d10c71f8acb7a50346e200f23f`) and `MOH3RDC.xbe`, with the `DATA` folder
-   beside them.
-3. Install Visual Studio 2022 with **Desktop development with C++**, **C++ Clang tools for Windows** and
-   **C++ CMake tools for Windows** (`build.bat` offers to add the last two).
-4. Run `build.bat`. The first build recompiles the game and takes a while. The exe is written to
-   `out\build\release\MOHRS.exe`, with `MOH3RDC.exe` beside it.
+### 1. Clone the Repository
 
-`config/game.toml` and `config/coop.toml` are already in the repository, so `build.bat` skips the symbol scan.
+Clone this repository and its SDK submodule using [Git](https://git-scm.com/).
+
+```
+git clone --recursive https://github.com/jbond2003/Medal-of-Honor-Rising-Sun-XBERecomp.git
+```
+
+### 2. Add the Required Game Files
+
+Place your extracted game files in the `assets` folder. `default.xbe` from the USA release must be there, with the
+`DATA` folder and `MOH3RDC.xbe` beside it.
+
+### 3. Install Dependencies
+
+Install [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) and select the following workloads and
+individual components:
+
+- Desktop development with C++
+- C++ Clang tools for Windows
+- C++ CMake tools for Windows
+
+> [!TIP]
+> `build.bat` offers to install the Clang and CMake components for you if they're missing.
+
+### 4. Build the Project
+
+- Run `build.bat`. The first build recompiles the entire game and can take a while.
+- When it finishes, run `out\build\release\MOHRS.exe`.
 
 ## Credits
 
-- [Xbox XBE Recomp](https://github.com/TGP482/XboxXBE-Recomp), the recompiler and runtime this is built on.
-- [XenonRecomp](https://github.com/hedge-dev/XenonRecomp), [Zydis](https://github.com/zyantific/zydis),
-  [toml++](https://github.com/marzer/tomlplusplus), [Dear ImGui](https://github.com/ocornut/imgui) and
-  [SDL](https://github.com/libsdl-org/SDL), through the SDK.
-- [XbSymbolDatabase](https://github.com/Cxbx-Reloaded/XbSymbolDatabase), for the library names the first config
-  was checked against.
-- **[MOHRS-XBERecomp](https://github.com/neonoxd/MOHRS-XBERecomp) by [neonoxd](https://github.com/neonoxd)**
-  (MIT), another Rising Sun port on the same SDK. Several of this port's PC features come from it: the menu
-  pointer (mouse hover, click and wheel in the game's menus), the PC Options pages inside the game's Options and
-  pause menus, the software cursor and its image, the keyboard and mouse layer, and the field of view setting.
-  Their code in `src/common` keeps neonoxd's copyright; the license is in `THIRD_PARTY_NOTICES.md`, which ships
-  in the release zip.
+- [Xbox XBE Recomp](https://github.com/TGP482/XboxXBE-Recomp) by TGP482, the recompiler and runtime this port is
+  built on.
+- [MOHRS-XBERecomp](https://github.com/neonoxd/MOHRS-XBERecomp) by [neonoxd](https://github.com/neonoxd) (MIT): the
+  menu pointer, the PC Options pages, the software cursor, the keyboard and mouse layer and the field of view
+  setting come from it. Its license is in `THIRD_PARTY_NOTICES.md`.
