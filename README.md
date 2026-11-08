@@ -12,6 +12,8 @@ keyboard and mouse support, and other enhancements.
 
 This port was created using the [Xbox XBE Recomp](https://github.com/TGP482/XboxXBE-Recomp) tool.
 
+[![Listed on PlayPorted](https://playported.com/badge.svg)](https://playported.com/ports/1194-medal-of-honor-rising-sun/)
+
 > [!NOTE]
 > This project does not include any game assets. You must provide the files from your own legally acquired copy of
 > the game to install or build.
